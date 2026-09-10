@@ -7,6 +7,7 @@ urls.py is self-contained, so any of them can later be extracted into its
 own Django project/deployable service without touching the others.
 """
 import os
+import dj_database_url
 from pathlib import Path
 from datetime import timedelta
 
@@ -66,15 +67,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('POSTGRES_DB', 'baron_capital'),
+#         'USER': os.environ.get('POSTGRES_USER', 'baron'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'baron'),
+#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'baron_capital'),
-        'USER': os.environ.get('POSTGRES_USER', 'baron'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'baron'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        default=(
+            f"postgresql://{os.environ.get('POSTGRES_USER', 'baron')}:"
+            f"{os.environ.get('POSTGRES_PASSWORD', 'baron')}@"
+            f"{os.environ.get('POSTGRES_HOST', 'localhost')}:"
+            f"{os.environ.get('POSTGRES_PORT', '5432')}/"
+            f"{os.environ.get('POSTGRES_DB', 'baron_capital')}"
+        ),
+        conn_max_age=600,
+        ssl_require=os.environ.get('DJANGO_DEBUG', 'True') != 'True',
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
