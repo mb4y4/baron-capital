@@ -1,16 +1,16 @@
 import { Link, NavLink } from 'react-router-dom'
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `font-heading text-sm font-semibold tracking-wide transition ${
-    isActive ? 'text-bc-gold' : 'text-white hover:text-bc-gold'
+  `font-heading text-sm font-semibold transition-colors ${
+    isActive ? 'text-bc-gold-deep' : 'text-bc-navy hover:text-bc-gold-deep'
   }`
 
 export default function Header() {
   return (
-    <header className="bg-bc-navy sticky top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="font-heading text-xl font-extrabold text-white">
-          Baron<span className="text-bc-gold">Capital</span>
+    <header className="sticky top-0 z-50 border-b border-bc-line bg-white">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+        <Link to="/" className="shrink-0">
+          <img src="/logo-color.png" alt="Baron Capital" className="h-9 w-auto md:h-10" />
         </Link>
         <nav className="hidden gap-8 md:flex">
           <NavLink to="/" end className={navLinkClass}>
@@ -26,7 +26,7 @@ export default function Header() {
             Contact
           </NavLink>
         </nav>
-        <Link to="/apply" className="btn-primary !py-2 !px-5 text-sm">
+        <Link to="/apply" className="rounded-sm bg-bc-navy px-5 py-2 font-heading text-sm font-bold text-white transition-colors hover:bg-bc-navy-ink">
           Apply Now
         </Link>
       </div>
