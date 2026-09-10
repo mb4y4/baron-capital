@@ -1,0 +1,25 @@
+# Usage: docker compose -f infra/docker-compose.yml -f infra/docker-compose.dev.yml up
+# Runs Vite dev server + Django runserver with live reload instead of built/prod containers.
+
+services:
+  backend-core:
+    build:
+      context: ../backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ../backend:/app
+    ports:
+      - '8000:8000'
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile.dev
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    ports:
+      - '5173:5173'
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api

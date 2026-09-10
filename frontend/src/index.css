@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-bc-navy;
+  }
+  body {
+    @apply font-body text-bc-ink;
+  }
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block rounded bg-bc-gold px-6 py-3 font-heading font-bold text-bc-navy hover:brightness-95 transition;
+  }
+  .btn-secondary {
+    @apply inline-block rounded border-2 border-bc-navy px-6 py-3 font-heading font-bold text-bc-navy hover:bg-bc-navy hover:text-white transition;
+  }
+  .section {
+    @apply mx-auto max-w-6xl px-6 py-16;
+  }
+}
