@@ -16,9 +16,13 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-bc-line bg-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-        <Link to="/" className="shrink-0" onClick={() => setMenuOpen(false)}>
+      {/* <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3"> */}
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-2">
+        {/* <Link to="/" className="shrink-0" onClick={() => setMenuOpen(false)}>
           <img src="/logo-color.png" alt="Baron Capital" className="h-9 w-auto md:h-10" />
+        </Link> */}
+        <Link to="/" className="shrink-0" onClick={() => setMenuOpen(false)}>
+          <img src="/logo-color.png" alt="Baron Capital" className="h-11 w-auto sm:h-12 md:h-14" />
         </Link>
 
         {/* Desktop nav */}
