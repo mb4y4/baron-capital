@@ -5,33 +5,29 @@ import LoanCalculator from '@/components/common/LoanCalculator'
 export default function HomePage() {
   return (
     <>
-      {/* Hero: full-bleed team photo with a navy scrim for text legibility */}
+      {/* Hero: full-bleed team photo. Gradient direction flips responsively --
+          top-to-bottom on narrow phones (so text sits in a readable band
+          regardless of width), left-to-right on wider screens. */}
       <section className="relative overflow-hidden">
         <img
           src="/hero-team.jpg"
           alt="The Baron Capital team"
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'linear-gradient(90deg, rgba(10,43,94,0.94) 0%, rgba(10,43,94,0.80) 35%, rgba(10,43,94,0.35) 70%, rgba(10,43,94,0.15) 100%)',
-          }}
-        />
-        <div className="relative mx-auto flex min-h-[520px] max-w-6xl items-center px-6 py-20 md:py-28">
+        <div className="absolute inset-0 bg-gradient-to-t from-bc-navy/95 via-bc-navy/75 to-bc-navy/30 md:bg-gradient-to-r md:from-bc-navy/95 md:via-bc-navy/80 md:to-bc-navy/20" />
+        <div className="relative mx-auto flex min-h-[440px] max-w-6xl items-end md:min-h-[520px] md:items-center px-6 py-12 md:py-28">
           <div className="max-w-xl">
-            <h1 className="font-heading text-4xl font-extrabold leading-tight text-white md:text-5xl">
+            <h1 className="font-heading text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
               Your financial growth partner
             </h1>
-            <p className="mt-3 font-heading text-xl text-bc-gold">Let's keep you company.</p>
-            <p className="mt-6 max-w-md text-white/80">
+            <p className="mt-3 font-heading text-lg text-bc-gold sm:text-xl">Let's keep you company.</p>
+            <p className="mt-5 max-w-md text-sm text-white/80 sm:mt-6 sm:text-base">
               Fast, flexible, and transparent financing for businesses and individuals
               building something worth financing.
             </p>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <Link to="/products" className="btn-primary">Explore products</Link>
-              <Link to="/apply" className="btn-secondary">Apply now</Link>
+            <div className="mt-7 flex flex-wrap gap-3 sm:mt-9 sm:gap-4">
+              <Link to="/products" className="btn-primary text-sm sm:text-base">Explore products</Link>
+              <Link to="/apply" className="btn-secondary text-sm sm:text-base">Apply now</Link>
             </div>
           </div>
         </div>
