@@ -7,7 +7,7 @@ urls.py is self-contained, so any of them can later be extracted into its
 own Django project/deployable service without touching the others.
 """
 import os
-import dj_database_url
+import dj_database_url  # type: ignore[import-unresolved]
 from pathlib import Path
 from datetime import timedelta
 
