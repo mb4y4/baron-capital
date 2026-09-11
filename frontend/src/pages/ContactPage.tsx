@@ -21,9 +21,24 @@ export default function ContactPage() {
     <section className="section max-w-2xl">
       <h1 className="text-4xl">Contact Us</h1>
       <p className="mt-3 text-bc-ink/70">
-        Phone: +254 715 547 978 · Email: info@baroncapital.co.ke · WhatsApp: +254 715 547 978
+        Phone:{' '}
+        <a href="tel:+254715547978" className="text-bc-navy hover:text-bc-gold-deep">
+          +254 715 547 978
+        </a>
+        {' '}· Email:{' '}
+        <a href="mailto:info@baroncapital.co.ke" className="text-bc-navy hover:text-bc-gold-deep">
+          info@baroncapital.co.ke
+        </a>
+        {' '}· WhatsApp:{' '}
+        
+        <a href="https://wa.me/254715547978"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-bc-navy hover:text-bc-gold-deep"
+        >
+          +254 715 547 978
+        </a>
       </p>
-
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <input
           required
