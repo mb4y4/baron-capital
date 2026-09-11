@@ -33,9 +33,26 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-2">
             <h4 className="eyebrow-rule mb-4 border-bc-gold text-bc-navy">Contact</h4>
             <ul className="space-y-2 text-sm text-bc-ink/70">
-              <li>+254 715 547 978</li>
-              <li>info@baroncapital.co.ke</li>
-              <li>WhatsApp: +254 715 547 978</li>
+              <li>
+                <a href="tel:+254715547978" className="hover:text-bc-gold-deep">
+                  +254 715 547 978
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@baroncapital.co.ke" className="hover:text-bc-gold-deep">
+                  info@baroncapital.co.ke
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/254715547978"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-bc-gold-deep"
+                >
+                  WhatsApp: +254 715 547 978
+                </a>
+              </li>
             </ul>
           </div>
         </div>
