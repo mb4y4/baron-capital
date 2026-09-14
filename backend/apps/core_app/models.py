@@ -35,12 +35,18 @@ class BlogPost(models.Model):
 
 
 class LoanApplication(models.Model):
+    # PRODUCT_CHOICES = [
+    #     ('logbook-loan', 'Logbook Loan'),
+    #     ('title-deed-loan', 'Title Deed Loan'),
+    #     ('asset-finance', 'Asset Finance'),
+    #     ('trade-finance', 'Trade Finance (Bid Bonds)'),
+    #     ('cargo-clearance-finance', 'Cargo Clearance Finance'),
+    # ]
     PRODUCT_CHOICES = [
         ('logbook-loan', 'Logbook Loan'),
         ('title-deed-loan', 'Title Deed Loan'),
-        ('asset-finance', 'Asset Finance'),
-        ('trade-finance', 'Trade Finance (Bid Bonds)'),
         ('cargo-clearance-finance', 'Cargo Clearance Finance'),
+        ('trade-finance', 'Trade Finance'),
     ]
     STATUS_CHOICES = [
         ('received', 'Received'),

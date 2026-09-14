@@ -1,3 +1,8 @@
+export interface ProductInstrument {
+  title: string
+  description: string
+}
+
 export interface Product {
   slug: string
   name: string
@@ -6,6 +11,13 @@ export interface Product {
   features: string[]
   howItWorks: string[]
   icon?: string
+  // Optional richer content, used by products with more depth (e.g. Trade Finance)
+  introParagraphs?: string[]
+  instruments?: ProductInstrument[]
+  whyChooseUs?: string[]
+  closingHeading?: string
+  closingParagraph?: string
+  disclaimer?: string
 }
 
 export interface Branch {
@@ -18,7 +30,7 @@ export interface Branch {
 
 export interface Testimonial {
   quote: string
-  author: string // anonymised, e.g. "Small Business Owner, Nairobi"
+  author: string
 }
 
 export interface BlogPost {
