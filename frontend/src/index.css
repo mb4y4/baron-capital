@@ -12,17 +12,47 @@
   a {
     @apply transition-colors;
   }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #0A2B5E;
+    outline-offset: 2px;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-block rounded bg-bc-gold px-6 py-3 font-heading font-bold text-bc-navy hover:brightness-95 transition;
+    @apply inline-block rounded-sm bg-bc-gold px-7 py-3 font-heading font-bold text-bc-navy hover:bg-bc-gold-deep hover:text-white transition-colors;
   }
   .btn-secondary {
-    /* @apply inline-block rounded border-2 border-bc-navy px-6 py-3 font-heading font-bold text-bc-navy hover:bg-bc-navy hover:text-white transition; */
     @apply inline-block rounded-sm border-2 border-white bg-white/10 px-7 py-3 font-heading font-bold text-white backdrop-blur-sm hover:bg-white hover:text-bc-navy transition-colors;
   }
   .section {
-    @apply mx-auto max-w-6xl px-6 py-16;
+    @apply mx-auto max-w-6xl px-6 py-20 md:py-24;
+  }
+  .ledger-row {
+    @apply border-b border-bc-line py-8 first:pt-0 last:border-b-0;
+  }
+  .eyebrow-rule {
+    @apply inline-block border-b-2 pb-1 text-sm font-heading font-bold;
+  }
+  /* Card hover-lift: used on product cards for a bit more tactile response */
+  .card-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+  }
+}
+
+/* Page-transition fade, applied to the routed content wrapper in App.tsx */
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.page-transition {
+  animation: page-fade-in 0.35s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
   }
 }
