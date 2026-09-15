@@ -33,6 +33,14 @@ export interface Testimonial {
   author: string
 }
 
+export interface TeamMember {
+  id: number
+  name: string
+  role: string
+  bio: string
+  photo: string | null
+}
+
 export interface BlogPost {
   slug: string
   title: string

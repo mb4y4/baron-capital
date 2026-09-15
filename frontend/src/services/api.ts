@@ -1,8 +1,6 @@
 import axios from 'axios'
-import type { LoanApplication, LoanCalculatorInput, LoanCalculatorResult } from '@/types'
+import type { BlogPost, LoanApplication, TeamMember } from '@/types'
 
-// In dev, Vite proxies /api -> http://localhost:8000 (see vite.config.ts)
-// In prod, set VITE_API_BASE_URL to the deployed API gateway URL
 const baseURL = import.meta.env.VITE_API_BASE_URL || '/api'
 
 export const apiClient = axios.create({
@@ -10,15 +8,10 @@ export const apiClient = axios.create({
   headers: { 'Content-Type': 'application/json' },
 })
 
-// --- Loan Calculator service ---
-export async function calculateLoan(
-  input: LoanCalculatorInput,
-): Promise<LoanCalculatorResult> {
-  const { data } = await apiClient.post<LoanCalculatorResult>(
-    '/loan-calculator/calculate/',
-    input,
-  )
-  return data
+// --- Team members (Core service) ---
+export async function fetchTeamMembers(): Promise<TeamMember[]> {
+  const { data } = await apiClient.get<{ results: TeamMember[] }>('/core/team/')
+  return data.results
 }
 
 // --- Loan applications (Core service) ---
@@ -28,9 +21,12 @@ export async function submitLoanApplication(payload: LoanApplication) {
 }
 
 // --- Blog / Insights (Core service) ---
-export async function fetchLatestPosts() {
-  const { data } = await apiClient.get('/core/posts/?limit=3')
-  return data
+// Django returns a paginated envelope: { count, next, previous, results }.
+// This unwraps it and trims to the 3 most recent posts (the model already
+// orders by -published_at, so results[0] is always the newest).
+export async function fetchLatestPosts(): Promise<BlogPost[]> {
+  const { data } = await apiClient.get<{ results: BlogPost[] }>('/core/posts/')
+  return data.results.slice(0, 3)
 }
 
 // --- Contact form (Core service) ---
