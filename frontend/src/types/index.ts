@@ -11,7 +11,6 @@ export interface Product {
   features: string[]
   howItWorks: string[]
   icon?: string
-  // Optional richer content, used by products with more depth (e.g. Trade Finance)
   introParagraphs?: string[]
   instruments?: ProductInstrument[]
   whyChooseUs?: string[]
@@ -33,6 +32,9 @@ export interface Testimonial {
   author: string
 }
 
+// Field names match the Django REST API response exactly (snake_case),
+// to avoid silent mismatches between what the backend sends and what the
+// frontend expects.
 export interface TeamMember {
   id: number
   name: string
@@ -42,10 +44,11 @@ export interface TeamMember {
 }
 
 export interface BlogPost {
-  slug: string
+  id: number
   title: string
+  slug: string
   excerpt: string
-  publishedAt: string
+  published_at: string
 }
 
 export interface LoanCalculatorInput {

@@ -1,9 +1,22 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { products } from '@/data/products'
 import LoanCalculator from '@/components/common/LoanCalculator'
 import Reveal from '@/components/common/Reveal'
+import { fetchLatestPosts } from '@/services/api'
+import type { BlogPost } from '@/types'
 
 export default function HomePage() {
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [postsLoaded, setPostsLoaded] = useState(false)
+
+  useEffect(() => {
+    fetchLatestPosts()
+      .then(setPosts)
+      .catch((err) => console.error('Failed to load blog posts:', err))
+      .finally(() => setPostsLoaded(true))
+  }, [])
+
   return (
     <>
       {/* Hero */}
@@ -104,10 +117,33 @@ export default function HomePage() {
       <section className="section">
         <Reveal>
           <h2 className="text-3xl">Insights</h2>
-          <p className="mt-4 text-bc-ink/60">
-            Latest articles will be pulled from the Core service blog API once published.
-          </p>
         </Reveal>
+
+        {postsLoaded && posts.length === 0 && (
+          <Reveal>
+            <p className="mt-4 text-bc-ink/60">
+              We're preparing our first articles on finance, business growth, and lending — check back soon.
+            </p>
+          </Reveal>
+        )}
+
+        {posts.length > 0 && (
+          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+            {posts.map((post, i) => (
+              <Reveal key={post.id} delayMs={i * 80}>
+                <article className="card-lift h-full rounded-lg border border-bc-navy/10 p-6 shadow-sm hover:shadow-md">
+                  <p className="text-xs text-bc-ink/50">
+                    {new Date(post.published_at).toLocaleDateString('en-KE', {
+                      year: 'numeric', month: 'long', day: 'numeric',
+                    })}
+                  </p>
+                  <h3 className="mt-2 text-lg">{post.title}</h3>
+                  <p className="mt-2 text-sm text-bc-ink/70">{post.excerpt}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        )}
       </section>
     </>
   )
